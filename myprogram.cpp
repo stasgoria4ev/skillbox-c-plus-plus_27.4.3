@@ -100,25 +100,23 @@ public:
 };
 
 int main() { 
-    Director* director = new Director;
+    Director director;
     std::cout << "Enter the number of teams: ";
-    std::cin >> director->countTeams;
+    std::cin >> director.countTeams;
 
-    for (int i = 0; i < director->countTeams; i++) {
-        Team* team = new Team(i);
-        std::cout << "\tEnter the number of team members " << team->name << ": ";
-        std::cin >> team->countWorkers;
-        team->AddWorkman();
-        director->teams.push_back(*team);
-        delete team; team = nullptr;
+    for (int i = 0; i < director.countTeams; i++) {
+        Team team(i);
+        std::cout << "\tEnter the number of team members " << team.name << ": ";
+        std::cin >> team.countWorkers;
+        team.AddWorkman();
+        director.teams.push_back(team);
     }
 
     do {
         std::cout << "\nEnter the direction of the head of the company(integer identifier): ";
-        std::cin >> director->directive;
-        director->Directions();
-    } while (director->UnemployedWorkers());
-    delete director; director = nullptr;
+        std::cin >> director.directive;
+        director.Directions();
+    } while (director.UnemployedWorkers());
 
     std::cout << "\nAll workers are busy with tasks!\n";
 }
